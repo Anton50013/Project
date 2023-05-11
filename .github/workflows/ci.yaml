@@ -3,7 +3,7 @@ name: Build and Publish image
 on:
   push:
     branches:
-    - "main"
+    - "master"
 
 jobs:
   release-image:
@@ -30,7 +30,7 @@ jobs:
       with:
         context: ./Docker
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/wordpress-prod:${{ steps.tag_version.outputs.new_tag }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/drupal-prod:${{ steps.tag_version.outputs.new_tag }}
     
     - name: Helm tool installer
       uses: Azure/setup-helm@v3
@@ -39,12 +39,12 @@ jobs:
       continue-on-error: true
       uses: instrumenta/kubeval-action@master
       with: 
-       files: ./chart/wordpress/templates
+       files: ./chart/drupal/templates
 
     - name: Helm Package
       run: |
         cd chart
-        helm package wordpress --version=${{ steps.tag_version.outputs.new_tag }} --app-version=${{ steps.tag_version.outputs.new_tag }}
+        helm package drupal --version=${{ steps.tag_version.outputs.new_tag }} --app-version=${{ steps.tag_version.outputs.new_tag }}
         cd ..
         helm repo index --url https://anton50013.github.io/Project/ --merge index.yaml .
 
