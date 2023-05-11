@@ -43,7 +43,7 @@ jobs:
 
     - name: Helm Package
       run: |
-        sed -i 's/_tag_/${{ steps.tag_version.outputs.new_tag }}/' Helm/wordpress/values.yaml
+        sed -i 's/_tag_/${{ steps.tag_version.outputs.new_tag }}/' drupal/values.yaml
 
     - name: Commit and push changes
       run: |
