@@ -55,7 +55,7 @@ extraDeploy: []
 ##
 image:
   registry: ghcr.io
-  repository: artsiomborisevich/devops-project
+  repository: Anton50013/Project
   tag: __replaceWithTag__
   digest: ""
   ## Specify a imagePullPolicy
@@ -614,7 +614,7 @@ mariadb:
 ## @param externalDatabase.existingSecret Name of a secret with the database password. (externalDatabase.password will be ignored and picked up from this secret). The secret has to contain the key db-password
 ##
 externalDatabase:
-  host: 192.168.201.3
+  host: 192.168.202.14
   port: 3306
   user: drupal
   password: XXX
