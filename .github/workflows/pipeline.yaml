@@ -43,11 +43,7 @@ jobs:
 
     - name: Helm Package
       run: |
-        sed -i 's/__replaceWithTag__/${{ github.ref_name }}/' drupal/values.yaml
-        helm package drupal --version=${{ github.ref_name }} --app-version=${{ github.ref_name }} -d ./helm-releases
-        helm repo index --url https://anton50013.github.io/project/ --merge index.yaml .
-        sed -i 's/${{ github.ref_name }}/__replaceWithTag__/' drupal/values.yaml
-
+        sed -i 's/_tag_/${{ steps.tag_version.outputs.new_tag }}/' Helm/wordpress/values.yaml
 
     - name: Commit and push changes
       run: |
