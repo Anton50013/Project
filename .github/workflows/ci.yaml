@@ -16,7 +16,7 @@ jobs:
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.0
       with:
-        github_token: ${{ secrets.B_TOKEN }}
+        github_token: ${{ secrets.GIT_TOKEN }}
         tag_prefix: ""
     
     - name: Log in to Docker Hub
