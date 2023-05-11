@@ -43,10 +43,11 @@ jobs:
 
     - name: Helm Package
       run: |
-        cd chart
-        helm package drupal --version=${{ steps.tag_version.outputs.new_tag }} --app-version=${{ steps.tag_version.outputs.new_tag }}
-        cd ..
-        helm repo index --url https://anton50013.github.io/Project/ --merge index.yaml .
+        sed -i 's/__replaceWithTag__/${{ github.ref_name }}/' drupal/values.yaml
+        helm package drupal --version=${{ github.ref_name }} --app-version=${{ github.ref_name }} -d ./helm-releases
+        helm repo index --url https://artsiomborisevich.github.io/devops-project/ --merge index.yaml .
+        sed -i 's/${{ github.ref_name }}/__replaceWithTag__/' drupal/values.yaml
+
 
     - name: Commit and push changes
       run: |
